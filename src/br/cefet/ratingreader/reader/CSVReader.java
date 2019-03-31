@@ -2,12 +2,15 @@ package br.cefet.ratingreader.reader;
 
 public class CSVReader {
 
+    public static Reader reader;
+
     public static boolean openCSV(String path) {
-        return Reader.openFile(path);
+        reader = new Reader();
+        return reader.openFile(path);
     }
 
     public static String[] readCSV() {
-        String line = Reader.readLine();
+        String line = reader.readLine();
         if (line != null) {
             return line.split(";");
         } else {
@@ -17,9 +20,14 @@ public class CSVReader {
     }
 
     public static String[] readCSV(int... index) {
-        String line = Reader.readLine();
+        String line = reader.readLine();
         if (line != null) {
             String[] values = line.split(";");
+            // Caso ele não consiga retornar os campos indicados (Pro problema no CSV)
+            if (values.length <= index[index.length - 1]) {
+                return null;
+            }
+
             String[] returnedValues = new String[index.length];
             int cont  = 0;
             for (int i : index) {
@@ -28,12 +36,11 @@ public class CSVReader {
             }
             return returnedValues;
         } else {
-            closeCSV();
             return null;
         }
     }
 
     public static boolean closeCSV() {
-        return Reader.closeFile();
+        return reader.closeFile();
     }
 }
