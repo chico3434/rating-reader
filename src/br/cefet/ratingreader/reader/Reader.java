@@ -4,38 +4,52 @@ import java.io.*;
 
 public class Reader {
 
-    private static BufferedReader bufferedReader;
-    private static java.io.Reader reader;
+   private FileInputStream fileInputStream;
 
-    public static boolean openFile(String path) {
-        File file = new File(path);
+    public Reader(String path) {
+        openFile(path);
+    }
+
+    public Reader() {}
+
+    public boolean openFile(String path) {
         try {
-            reader = new InputStreamReader(new FileInputStream(path), "UTF-8");
-            bufferedReader = new BufferedReader(reader);
+            fileInputStream = new FileInputStream(path);
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
-    public static String readLine() {
+    public String readLine() {
         try {
-            String line = bufferedReader.readLine();
+            int avalaible = fileInputStream.available();
+            String line = "";
+            for (int i = 0; i < avalaible; i++) {
+                /*
+                * O if é a lógica que faz parar de ler quando a linha termina
+                * o \n indica a quebra de linha
+                * quando a String line tiver \n significa que esta linha chegou ao fim
+                * o replace serve para tirar o \n dos dados
+                * */
+                if (line.contains("\n")) {
+                    line = line.replace("\n", "");
+                    break;
+                }
+                char character = (char) fileInputStream.read();
+                line += character;
+            }
             return line;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static boolean closeFile() {
+    public boolean closeFile() {
         try {
-            reader.close();
+            fileInputStream.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
