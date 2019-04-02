@@ -6,20 +6,20 @@ public class Reader {
 
     private FileInputStream fileInputStream;
 
-   public boolean hasNext() {
-       try {
-           return  (fileInputStream.available() > 0);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       return false;
-   }
+    public Reader() {}
 
     public Reader(String path) {
         openFile(path);
     }
 
-    public Reader() {}
+    public boolean hasNext() {
+        try {
+            return  (fileInputStream.available() > 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean openFile(String path) {
         try {
