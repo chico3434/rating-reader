@@ -30,7 +30,7 @@ public class Main {
                 pathSearch = args[i].replace("--search-path=", "");
             }
             if (args[i].contains("--out=")) {
-                out= args[i].replace("--out=", "");
+                out = args[i].replace("--out=", "");
             }
         }
 
@@ -47,12 +47,9 @@ public class Main {
             System.out.println("Caso queira ler um só filme digite \'skip\'");
             pathSearch = sc.nextLine();
             if (!pathSearch.trim().toLowerCase().equals("skip")) {
-                result = PathSearch.searchByPath(path);
+                result = PathSearch.searchByPath(pathSearch);
                 if (result != null) {
                     for (String[] movie : result) {
-//                        for (String string : movie) {
-//                            System.out.println(string);
-//                        }
                         System.out.printf("Nome: %s - Classificação %s\n", movie[1], movie[16]);
                     }
                 } else {
@@ -61,6 +58,15 @@ public class Main {
             } else {
                 pathSearch = "";
             }
+        } else {
+                result = PathSearch.searchByPath(pathSearch);
+                if (result != null) {
+                    for (String[] movie : result) {
+                        System.out.printf("Nome: %s - Classificação %s\n", movie[1], movie[16]);
+                    }
+                } else {
+                    System.out.println("Algum erro ocorreu");
+                }
         }
 
         if (movieSearch.equals("")) {
@@ -99,19 +105,19 @@ public class Main {
             } else {
                 System.exit(0);
             }
-            if (result != null) {
-                if (Writer.write(out, result)) {
+        }
+        if (result != null) {
+            if (Writer.write(out, result)) {
+                System.out.println("Salvo com sucesso!");
+            } else {
+                System.out.println("Erro ao salvar!");
+            }
+        } else {
+            if (uniqueResult.length > 0) {
+                if (Writer.write(out, uniqueResult)) {
                     System.out.println("Salvo com sucesso!");
                 } else {
                     System.out.println("Erro ao salvar!");
-                }
-            } else {
-                if (uniqueResult.length > 0) {
-                    if (Writer.write(out, uniqueResult)) {
-                        System.out.println("Salvo com sucesso!");
-                    } else {
-                        System.out.println("Erro ao salvar!");
-                    }
                 }
             }
         }
