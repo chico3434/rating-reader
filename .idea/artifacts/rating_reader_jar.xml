@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="rating-reader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/rating_reader_jar</output-path>
+    <root id="archive" name="rating-reader.jar">
+      <element id="module-output" name="rating-reader" />
+    </root>
+  </artifact>
+</component>
