@@ -9,7 +9,7 @@ public class Search {
         while(data != null) {
             if (data.length > 10) {
                 if (data[10].trim().equals("Longa Metragem")) {
-                    if (data[2].trim().equals(name)) {
+                    if (data[2].trim().toLowerCase().equals(name.toLowerCase())) {
                         return data;
                     }
                 }

@@ -4,6 +4,10 @@ public class CSVReader {
 
     public static Reader reader;
 
+    public static boolean hasNext() {
+        return reader.hasNext();
+    }
+
     public static boolean openCSV(String path) {
         reader = new Reader();
         return reader.openFile(path);

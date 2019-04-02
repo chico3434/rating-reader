@@ -4,7 +4,16 @@ import java.io.*;
 
 public class Reader {
 
-   private FileInputStream fileInputStream;
+    private FileInputStream fileInputStream;
+
+   public boolean hasNext() {
+       try {
+           return  (fileInputStream.available() > 0);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       return false;
+   }
 
     public Reader(String path) {
         openFile(path);
