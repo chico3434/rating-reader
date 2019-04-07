@@ -112,7 +112,7 @@ public class Main {
             }
         }
         if (formatted) {
-            if (FormattedWriter.write(out, result)) {
+            if (FormattedWriter.writeSet(out, result)) {
                 System.out.println("Salvo com sucesso!");
             } else {
                 System.out.println("Erro ao salvar!");

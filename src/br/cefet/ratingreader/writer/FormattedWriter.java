@@ -3,7 +3,10 @@ package br.cefet.ratingreader.writer;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class FormattedWriter {
 
@@ -12,6 +15,28 @@ public class FormattedWriter {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
             for (String[] movie : result) {
+                String name = movie[2].toLowerCase();
+                String rating = preparedRating(movie[16]);
+
+                bufferedWriter.append(name + "," + rating+ "\n");
+            }
+            bufferedWriter.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean writeSet(String path, List<String[]> result) {
+        Set<String[]> set = new HashSet<>();
+        set.addAll(result);
+        System.out.println("Salvando...");
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+            Iterator<String[]> iterator = set.iterator();
+            while(iterator.hasNext()) {
+                String[] movie = iterator.next();
                 String name = movie[2];
                 String rating = preparedRating(movie[16]);
 
