@@ -1,0 +1,11 @@
+Argumentos:
+-f : busca os filmes que estejam no caminho + movies.txt
+-d : busca os filmes a partir do caminho onde hajam arquivos das legendas e os nomes dos arquivos sejam os nomes dos filmes(nome.txt).
+-s : Guarda o resultado em um arquivo que será o caminho de entrada mais /out/rating.csv
+-c : Mostra o resultado no console
+-D : Modo default
+
+source= : csv que será lido
+out= : lugar onde estarão o nome dos filmes
+Como funciona:
+Le algum CSV que possua as classificações indicativas de filmes e faz uma busca a partir delas.
