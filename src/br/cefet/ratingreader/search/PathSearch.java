@@ -15,9 +15,9 @@ public class PathSearch {
         while (CSVReader.hasNext()) {
             String[] data = CSVReader.readCSV();
             System.out.print(".");
-            if (movies.contains(data[1].trim().toLowerCase())) {
+            if (movies.contains(data[2].trim().toLowerCase())) {
                 if (data[10].trim().equals("Longa Metragem")) {
-                    System.out.println("\nAchado: " + data[1]);
+                    System.out.println("\nAchado: " + data[2]);
                     listOfResults.add(data);
                 }
             }

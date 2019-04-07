@@ -3,6 +3,7 @@ package br.cefet.ratingreader;
 import br.cefet.ratingreader.reader.CSVReader;
 import br.cefet.ratingreader.search.PathSearch;
 import br.cefet.ratingreader.search.Search;
+import br.cefet.ratingreader.writer.FormattedWriter;
 import br.cefet.ratingreader.writer.Writer;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // formatted é a variável que indicará se o resultado vai sair no formato padrão: Nome, Número da classificação
+        boolean formatted = false;
         String path = "";
         String movieSearch = "";
         String pathSearch = "";
@@ -31,6 +34,9 @@ public class Main {
             }
             if (args[i].contains("--out=")) {
                 out = args[i].replace("--out=", "");
+            }
+            if (args[i].contains("--formatted")) {
+                formatted = true;
             }
         }
 
@@ -101,10 +107,17 @@ public class Main {
             if (response.equals("sim")) {
                 System.out.println("Onde deseja salvar?");
                 out = sc.nextLine();
-
             } else {
                 System.exit(0);
             }
+        }
+        if (formatted) {
+            if (FormattedWriter.write(out, result)) {
+                System.out.println("Salvo com sucesso!");
+            } else {
+                System.out.println("Erro ao salvar!");
+            }
+            System.exit(0);
         }
         if (result != null) {
             if (Writer.write(out, result)) {
