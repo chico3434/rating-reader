@@ -12,6 +12,10 @@ public class Reader {
         openFile(path);
     }
 
+    public Reader(File file) {
+        openFile(file);
+    }
+
     public boolean hasNext() {
         try {
             return  (fileInputStream.available() > 0);
@@ -24,6 +28,16 @@ public class Reader {
     public boolean openFile(String path) {
         try {
             fileInputStream = new FileInputStream(path);
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean openFile(File file) {
+        try {
+            fileInputStream = new FileInputStream(file);
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
